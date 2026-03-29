@@ -15,7 +15,7 @@ Link: https://fr.mathworks.com/help/robotics/ug/estimate-pose-of-fixed-camera-re
 Now, let the **Robot Base Frame** be **Frame A** in the image below and the **End Effector Frame** be **Frame B**. 
 We can see from this that with respect to the robot frame:
 
-$X_b$ points in the opposite direction as $X_a$: 
+$X_b$ points in the opposite direction from $X_a$: 
 
 $$X_b = \begin{bmatrix} -1 & 0 & 0 \\ \end{bmatrix}$$
 
@@ -23,7 +23,7 @@ $Y_b$ points in the same direction as $Y_a$:
 
 $$Y_b = \begin{bmatrix} 0 & 1 & 0 \\ \end{bmatrix}$$ 
 
-$Z_b$ points in the opposite direction as $Z_a$: 
+$Z_b$ points in the opposite direction from $Z_a$: 
 
 $$Z_b = \begin{bmatrix} 0 & 0 & -1 \\ \end{bmatrix}$$ 
 
@@ -37,7 +37,25 @@ $$R = \begin{bmatrix}
 0 & 0 & -1  \\
 \end{bmatrix}$$
 
+Now, combining this rotation matrix with the displacement of the end effector frame from the world frame, we get the **homogenous matrix**
+
+$$H = \begin{bmatrix} 
+R & d \\ 
+0 & 1  \\ 
+\end{bmatrix}$$
+
+$$H = \begin{bmatrix} 
+-1 & 0 & 0 & d_x \\ 
+0 & 1 & 0 & d_y  \\ 
+0 & 0 & -1 & d_z \\
+0 & 0 & 0 & 1 \\
+\end{bmatrix}$$
+
+where R is our 3x3 rotation matrix and d is a 3 x 1 displacement vector, representing the displacement of our end effector frame from the world frame. 
+
 ![IMG_DF5266B3BE8B-1](https://github.com/user-attachments/assets/01e8716c-debf-47ce-8b05-baa327d9c36b)
+
+
 
 
 
