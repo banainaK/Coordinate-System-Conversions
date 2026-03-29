@@ -15,7 +15,7 @@ To express this rotation and displacement in terms of the **world frame**, we us
 Link: https://fr.mathworks.com/help/robotics/ug/estimate-pose-of-fixed-camera-relative-to-robot-base.html
 
 Now, let the **Robot Base Frame** be **Frame A** in the image below and the **End Effector Frame** be **Frame B**. 
-We can see from this that with respect to the robot frame:
+We can see from the image below that with respect to the **Robot Base Frame**, the **End Effector Frame**:
 
 $X_b$ points in the opposite direction from $X_a$: 
 
