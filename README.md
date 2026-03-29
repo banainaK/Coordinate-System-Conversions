@@ -53,7 +53,7 @@ $$H = \begin{bmatrix}
 0 & 0 & 0 & 1 \\
 \end{bmatrix}$$
 
-where R is our 3x3 rotation matrix and d is a 3 x 1 displacement vector, representing the displacement of our end effector frame from the world frame. 
+where R is our 3x3 **rotation matrix** and d is a 3 x 1 **displacement vector**, representing the displacement of our end effector frame from the world frame. 
 
 
 
