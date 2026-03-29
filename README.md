@@ -5,6 +5,8 @@ I am currently working on a game development project in Unreal Engine, and if th
 For context, to describe the problem I was facing: 
 I had matrices corresponding to rotation and displacement in a robot's coordinate frame. To better explain what these matrices are, I am going to attempt to explain linear algebra concepts used in robotics. 
 
+## Section 1: The Homogeneous Matrix
+
 In robotics, every link or joint has its own coordinate frame (also called **body frame**), which describes rotation and displacement with respect to its frame. 
 To express this rotation and displacement in terms of the **world frame**, we use a **homogeneous matrix**. To explain what this means, consider this setup:
 
@@ -55,6 +57,7 @@ $$H = \begin{bmatrix}
 
 where R is our 3x3 **rotation matrix** and d is a 3 x 1 **displacement vector**, representing the displacement of our end effector frame from the world frame. 
 
+## Section 2: Game Engine Coordinate Systems
 
 
 
