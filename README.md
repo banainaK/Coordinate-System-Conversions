@@ -29,6 +29,8 @@ $Z_b$ points in the opposite direction from $Z_a$:
 
 $$Z_b = \begin{bmatrix} 0 & 0 & -1 \\ \end{bmatrix}$$ 
 
+![IMG_2493FF478148-1](https://github.com/user-attachments/assets/cb66dbb6-673f-4a85-bd1e-3e607b66d5ca)
+
 Therefore, we can represent the **body frame's** rotation with respect to the **world frame** or its **rotation matrix** as: 
 
 $$R = \begin{bmatrix} X_b & Y_b & Z_b \\ \end{bmatrix}$$ 
@@ -38,8 +40,6 @@ $$R = \begin{bmatrix}
 0 & 1 & 0 \\ 
 0 & 0 & -1  \\
 \end{bmatrix}$$
-
-![IMG_2493FF478148-1](https://github.com/user-attachments/assets/cb66dbb6-673f-4a85-bd1e-3e607b66d5ca)
 
 Now, combining this rotation matrix with the displacement of the end effector frame from the world frame, we get the **homogenous matrix**
 
