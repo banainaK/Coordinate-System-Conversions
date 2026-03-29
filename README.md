@@ -37,6 +37,8 @@ $$R = \begin{bmatrix}
 0 & 0 & -1  \\
 \end{bmatrix}$$
 
+![IMG_2493FF478148-1](https://github.com/user-attachments/assets/cb66dbb6-673f-4a85-bd1e-3e607b66d5ca)
+
 Now, combining this rotation matrix with the displacement of the end effector frame from the world frame, we get the **homogenous matrix**
 
 $$H = \begin{bmatrix} 
@@ -53,7 +55,6 @@ $$H = \begin{bmatrix}
 
 where R is our 3x3 rotation matrix and d is a 3 x 1 displacement vector, representing the displacement of our end effector frame from the world frame. 
 
-![IMG_DF5266B3BE8B-1](https://github.com/user-attachments/assets/01e8716c-debf-47ce-8b05-baa327d9c36b)
 
 
 
