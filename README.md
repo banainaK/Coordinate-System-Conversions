@@ -58,7 +58,27 @@ $$H = \begin{bmatrix}
 where R is our 3x3 **rotation matrix** and d is a 3 x 1 **displacement vector**, representing the displacement of our end effector frame from the world frame. 
 
 ## Section 2: Game Engine Coordinate Systems
-Ok, so now we have the above **homogenous matrix**, how would we go about converting this to a different coordinate system? For example, how would we convert this to Unreal Engine's Coordinate System? 
+Ok, so we have the above **homogenous matrix**, how would we go about converting this to a different coordinate system? For example, how would we convert this to Unreal Engine's Coordinate System? 
+
+Unreal Engine uses a **left-handed** coordinate system in comparison to our robot frame, which uses a **right-handed** coordinate system. 
+
+We see that the Unreal Engine coordinate system is defined to be: Z = up, Y = forward, X = right. We designate these frames as our **world frame**, whereas our end effector frame is a **local frame**.
+
+![IMG_C0C3F3D62D3C-1](https://github.com/user-attachments/assets/7e9a7dec-7f3f-4226-9030-ddc2686581c8)
+
+What about rotation? Most game engines handle rotation using Euler Angles (Roll, Pitch, Yaw) or Quaternions. Roll is defined as the rotation about the X-axis, Pitch is rotation about the Y-axis, and Yaw is rotation about the Z-axis. 
+
+Using Euler angles is usually not recommended because they can lead to unexpected behavior where the values you read back differ from what you assigned. Therefore, it is recommended to use Quaternions, which game engines use to internally store Euler Angles. 
+
+However, it is important to recognize that not all game engines store Euler Angles in the same way. For example, Unity's **Vector3** (a type of struct) stores Euler angles in Yaw, Roll, Pitch order, whereas Unreal Engine's **FRotator**(also a type of struct) stores Euler Angles in Pitch, Yaw, and Roll order. 
+
+This just means Unity applies rotation about the z-axis, then the x-axis, and then the y-axis, whereas Unreal Engine applies rotation about the y-axis, then the z-axis, and then the x-axis. 
+
+
+
+
+
+
 
 
 
