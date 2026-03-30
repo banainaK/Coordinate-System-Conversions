@@ -72,7 +72,7 @@ Using Euler angles is usually not recommended because they can lead to unexpecte
 
 However, it is important to recognize that not all game engines store Euler Angles in the same way. For example, Unity's **Vector3** (a type of struct) stores Euler angles in Yaw, Roll, Pitch order, whereas Unreal Engine's **FRotator**(also a type of struct) stores Euler Angles in Pitch, Yaw, and Roll order. 
 
-This just means Unity applies rotation about the z-axis, then the x-axis, and then the y-axis, whereas Unreal Engine applies rotation about the y-axis, then the z-axis, and then the x-axis. 
+This just means Unity applies rotation about the Z-axis, then the X-axis, and then the Y-axis, whereas Unreal Engine applies rotation about the Y-axis, then the Z-axis, and then the X-axis. 
 
 
 
