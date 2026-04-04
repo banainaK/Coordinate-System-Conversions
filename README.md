@@ -10,35 +10,35 @@ I had matrices corresponding to rotation and displacement in a robot's coordinat
 In robotics, every link or joint has its own coordinate frame (also called **body frame**), which describes rotation and displacement with respect to its frame. 
 To express this rotation and displacement in terms of the **world frame**, we use a **homogeneous matrix**. To explain what this means, consider this setup:
 
-<img width="452" height="558" alt="image" src="https://github.com/user-attachments/assets/04ff3e44-0bc8-4da8-8a02-956c61735851" />
+![JPEG image-499B-84D6-A5-0](https://github.com/user-attachments/assets/5744ccee-8da6-4111-81d6-2affaa41623b)
 
-Link: https://fr.mathworks.com/help/robotics/ug/estimate-pose-of-fixed-camera-relative-to-robot-base.html
+In robotics, usually this camera is defined in terms of **OpenCV convention** where Z = forward, X = right, Y = down
 
-Now, let the **Robot Base Frame** be **Frame A** in the image below and the **End Effector Frame** be **Frame B**. 
-We can see from the image below that with respect to the **Robot Base Frame**, the **End Effector Frame**:
+Now, let the **Robot Base Frame** be **Frame A** in the image below and the **Camera Frame** be **Frame B**. 
+We can see from the image below that with respect to the **Robot Base Frame**, the **Camera Frame**:
 
-$X_b$ points in the opposite direction from $X_a$: 
+$X_b$ points in the same direction as $Y_a$: 
 
-$$X_b = \begin{bmatrix} -1 & 0 & 0 \\ \end{bmatrix}$$
+$$X_b = \begin{bmatrix} 0 & 1 & 0 \\ \end{bmatrix}$$
 
-$Y_b$ points in the same direction as $Y_a$: 
+$Y_b$ points in the opposite direction from $Z_a$: 
 
-$$Y_b = \begin{bmatrix} 0 & 1 & 0 \\ \end{bmatrix}$$ 
+$$Y_b = \begin{bmatrix} 0 & 0 & -1 \\ \end{bmatrix}$$ 
 
-$Z_b$ points in the opposite direction from $Z_a$: 
+$Z_b$ points in the same direction as $X_a$: 
 
-$$Z_b = \begin{bmatrix} 0 & 0 & -1 \\ \end{bmatrix}$$ 
+$$Z_b = \begin{bmatrix} 1 & 0 & 0 \\ \end{bmatrix}$$ 
 
-![IMG_2493FF478148-1](https://github.com/user-attachments/assets/cb66dbb6-673f-4a85-bd1e-3e607b66d5ca)
+![IMG_A0E6FC345A34-1](https://github.com/user-attachments/assets/71d04744-7a04-4f50-8f6b-668a26ddd852)
 
 Therefore, we can represent the **body frame's** rotation with respect to the **world frame** or its **rotation matrix** as: 
 
 $$R = \begin{bmatrix} X_b & Y_b & Z_b \\ \end{bmatrix}$$ 
 
 $$R = \begin{bmatrix} 
--1 & 0 & 0 \\ 
-0 & 1 & 0 \\ 
-0 & 0 & -1  \\
+0 & 0 & 1 \\ 
+1 & 0 & 0 \\ 
+0 & -1 & 0  \\
 \end{bmatrix}$$
 
 Now, combining this rotation matrix with the displacement of the end effector frame from the world frame, we get the **homogenous matrix**
@@ -49,9 +49,9 @@ R & d \\
 \end{bmatrix}$$
 
 $$H = \begin{bmatrix} 
--1 & 0 & 0 & d_x \\ 
-0 & 1 & 0 & d_y  \\ 
-0 & 0 & -1 & d_z \\
+0 & 0 & 1 & d_x \\ 
+1 & 0 & 0 & d_y  \\ 
+0 & -1 & 0 & d_z \\
 0 & 0 & 0 & 1 \\
 \end{bmatrix}$$
 
@@ -81,20 +81,27 @@ This just means Unity applies rotation about the Z -> X -> Y axis, whereas Unrea
 
 ## Section 3: The Linear Algebra
 
-So our goal is to take coordinates from our robot's local frame -> robot world frame -> Unreal Engine's coordinate system
+So our goal is to take coordinates from our camera frame -> robot world frame -> Unreal Engine's coordinate system
 
-We already have the **transformation** from the robot's local frame to the world frame. That is just our homogenous matrix:
+We already have the **transformation** from the camera frame to the world frame. This is just our homogenous matrix:
 
 $$H = \begin{bmatrix} 
--1 & 0 & 0 & d_x \\ 
-0 & 1 & 0 & d_y  \\ 
-0 & 0 & -1 & d_z \\
+0 & 1 & 0 & d_x \\ 
+0 & 0 & -1 & d_y  \\ 
+1 & 0 & 0 & d_z \\
 0 & 0 & 0 & 1 \\
 \end{bmatrix}$$
 
 Now, how do we go from the robot world frame to Unreal Engine's coordinate system? 
 
-For that, we have to understand a little bit of linear algebra, specifically **change of basis matrices**. 
+Where this gets tricky is that, in our world frame: Z = up, X = forward, Y = right. In Unreal Engine, Z = up, Y = forward, X = right. 
+
+So, **both** the X and Y axes need to be swapped. 
+
+
+
+
+
 
 
 
