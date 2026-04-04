@@ -60,19 +60,43 @@ where R is our 3x3 **rotation matrix** and d is a 3 x 1 **displacement vector**,
 ## Section 2: Game Engine Coordinate Systems
 Ok, so we have the above **homogenous matrix**, how would we go about converting this to a different coordinate system? For example, how would we convert this to Unreal Engine's Coordinate System? 
 
-Unreal Engine uses a **left-handed** coordinate system in comparison to our robot frame, which uses a **right-handed** coordinate system. 
+First, let's start by understanding Unreal Engine's coordinate system. 
 
-We see that the Unreal Engine coordinate system is defined to be: Z = up, Y = forward, X = right. We designate these frames as our **world frame**, whereas our end effector frame is a **local frame**.
+Unreal Engine uses a **left-handed** coordinate system in comparison to our robot world frame, which uses a **right-handed** coordinate system. 
+
+We see that the Unreal Engine coordinate system is defined to be: Z = up, Y = forward, X = right. 
 
 ![IMG_C0C3F3D62D3C-1](https://github.com/user-attachments/assets/7e9a7dec-7f3f-4226-9030-ddc2686581c8)
 
-What about rotation? Most game engines handle rotation using Euler Angles (Roll, Pitch, Yaw) or Quaternions. Roll is defined as the rotation about the X-axis, Pitch is rotation about the Y-axis, and Yaw is rotation about the Z-axis. 
+What about rotation? Most game engines handle rotation using Euler Angles (Roll, Pitch, Yaw) or Quaternions. 
 
-Using Euler angles is usually not recommended because they can lead to unexpected behavior where the values you read back differ from what you assigned. Therefore, it is recommended to use Quaternions, which game engines use to internally store Euler Angles. 
+**Roll** is defined as the rotation about the X-axis, **Pitch** is rotation about the Y-axis, and **Yaw** is rotation about the Z-axis. 
 
-However, it is important to recognize that not all game engines store Euler Angles in the same way. For example, Unity's **Vector3** (a type of struct) stores Euler angles in Yaw, Roll, Pitch order, whereas Unreal Engine's **FRotator**(also a type of struct) stores Euler Angles in Pitch, Yaw, and Roll order. 
+Using Euler angles is usually not recommended because they can lead to unexpected behavior where the values you read back differ from what you assigned. That's why it is usually recommended to use Quaternions, which game engines internally use to store Euler Angles. 
 
-This just means Unity applies rotation about the Z-axis, then the X-axis, and then the Y-axis, whereas Unreal Engine applies rotation about the Y-axis, then the Z-axis, and then the X-axis. 
+However, it is important to recognize that not all game engines store Euler Angles in the same way. 
+For example, Unity's **Vector3** (a type of struct) stores Euler angles in Yaw, Roll, Pitch order, whereas Unreal Engine's **FRotator**(also a type of struct) stores Euler Angles in Pitch, Yaw, and Roll order. 
+
+This just means Unity applies rotation about the Z -> X -> Y axis, whereas Unreal Engine applies rotation about the Y -> Z -> X axis. 
+
+## Section 3: The Linear Algebra
+
+So our goal is to take coordinates from our robot's local frame -> robot world frame -> Unreal Engine's coordinate system
+
+We already have the **transformation** from the robot's local frame to the world frame. That is just our homogenous matrix:
+
+$$H = \begin{bmatrix} 
+-1 & 0 & 0 & d_x \\ 
+0 & 1 & 0 & d_y  \\ 
+0 & 0 & -1 & d_z \\
+0 & 0 & 0 & 1 \\
+\end{bmatrix}$$
+
+Now, how do we go from the robot world frame to Unreal Engine's coordinate system? 
+
+For that, we have to understand a little bit of linear algebra, specifically **change of basis matrices**. 
+
+
 
 
 
