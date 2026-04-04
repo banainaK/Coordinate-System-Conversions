@@ -86,9 +86,9 @@ So our goal is to take coordinates from our camera frame -> robot world frame ->
 We already have the **transformation** from the camera frame to the world frame. This is just our homogenous matrix:
 
 $$H = \begin{bmatrix} 
-0 & 1 & 0 & d_x \\ 
-0 & 0 & -1 & d_y  \\ 
-1 & 0 & 0 & d_z \\
+0 & 0 & 1 & d_x \\ 
+1 & 0 & 0 & d_y  \\ 
+0 & -1 & 0 & d_z \\
 0 & 0 & 0 & 1 \\
 \end{bmatrix}$$
 
@@ -97,6 +97,8 @@ Now, how do we go from the robot world frame to Unreal Engine's coordinate syste
 Where this gets tricky is that, in our world frame: Z = up, X = forward, Y = right. In Unreal Engine, Z = up, Y = forward, X = right. 
 
 So, **both** the X and Y axes need to be swapped. 
+
+
 
 
 
