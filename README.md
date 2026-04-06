@@ -83,7 +83,7 @@ This just means Unity applies rotation about the Z -> X -> Y axis, whereas Unrea
 
 So our goal is to take coordinates from our camera frame -> robot world frame -> Unreal Engine's coordinate system
 
-We already have the **transformation** from the camera frame to the world frame. This is just our homogenous matrix:
+We already have the **transformation** that takes us from the camera frame to the world frame. This is just our homogenous matrix:
 
 $$H = \begin{bmatrix} 
 0 & 0 & 1 & d_x \\ 
@@ -97,6 +97,25 @@ Now, how do we go from the robot world frame to Unreal Engine's coordinate syste
 Where this gets tricky is that, in our world frame: Z = up, X = forward, Y = right. In Unreal Engine, Z = up, Y = forward, X = right. 
 
 So, **both** the X and Y axes need to be swapped. 
+
+### Intrinsic and Extrinsic Rotations
+
+---- Explain transformations --- 
+
+Extrinsic rotation is just rotation about the x, y, or z axis. 
+
+![JPEG image-4926-9736-8B-0](https://github.com/user-attachments/assets/cc83580f-a3df-46ce-b188-f1d5362da4d7)
+
+Intrinsic rotation is rotation about a rotated coordinate system (X, Y, Z), which rotates with respect to the coordinate system we are familiar with (x, y, z). 
+
+Let us consider a scenario to understand this better. 
+
+I use this example from this article: https://dominicplein.medium.com/extrinsic-intrinsic-rotation-do-i-multiply-from-right-or-left-357c38c1abfd
+
+Suppose we rotate (x, y, z) by 45 degrees about the z-axis to get a new coordinate system, A, and then we rotate A by 45 degrees about the z-axis to get coordinate system, B. 
+
+How would we define our coordinates in B with respect to the original coordinate system? 
+
 
 
 
