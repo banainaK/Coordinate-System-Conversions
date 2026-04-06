@@ -106,7 +106,7 @@ Extrinsic rotation is just rotation about the x, y, or z axis.
 
 ![JPEG image-4926-9736-8B-0](https://github.com/user-attachments/assets/cc83580f-a3df-46ce-b188-f1d5362da4d7)
 
-Intrinsic rotation is rotation about a rotated coordinate system (X, Y, Z), which rotates with respect to the coordinate system we are familiar with (x, y, z). 
+Intrinsic rotation is rotation about a **rotated coordinate system** (X, Y, Z), which rotates with respect to the coordinate system we are familiar with (x, y, z). 
 
 Let us consider a scenario to understand this better. 
 
