@@ -66,7 +66,7 @@ Unreal Engine uses a **left-handed** coordinate system in comparison to our robo
 
 We see that the Unreal Engine coordinate system is defined to be: Z = up, Y = forward, X = right. 
 
-![IMG_C0C3F3D62D3C-1](https://github.com/user-attachments/assets/7e9a7dec-7f3f-4226-9030-ddc2686581c8)
+![IMG_FF10AC574394-1](https://github.com/user-attachments/assets/94a154b2-02c7-4237-bf79-5f831c8936fe)
 
 What about rotation? Most game engines handle rotation using Euler Angles (Roll, Pitch, Yaw) or Quaternions. 
 
@@ -83,7 +83,7 @@ This just means Unity applies rotation about the Z -> X -> Y axis, whereas Unrea
 
 So our goal is to take coordinates from our camera frame -> robot world frame -> Unreal Engine's coordinate system
 
-We already have the **transformation** that takes us from the camera frame to the world frame. This is just our homogenous matrix:
+We already have the **transformation** that takes us from the camera frame to the robot world frame. This is just our homogenous matrix:
 
 $$H = \begin{bmatrix} 
 0 & 0 & 1 & d_x \\ 
@@ -94,9 +94,67 @@ $$H = \begin{bmatrix}
 
 Now, how do we go from the robot world frame to Unreal Engine's coordinate system? 
 
-Where this gets tricky is that, in our world frame: Z = up, X = forward, Y = right. In Unreal Engine, Z = up, Y = forward, X = right. 
+The misconception here is that can use the method above to go from the **robot world frame** to the **Unreal Engine world**.
 
-So, **both** the X and Y axes need to be swapped. 
+i.e. 
+
+![IMG_FF10AC574394-1](https://github.com/user-attachments/assets/94a154b2-02c7-4237-bf79-5f831c8936fe)
+
+I will denote RW as Robot World and UE as Unreal Engine World. 
+
+$X_{\text{RW}}$ points in the same direction as $Y_{\text{UE}}$: 
+
+$$X_{\text{RW}} = \begin{bmatrix} 0 & 1 & 0 \\ \end{bmatrix}$$
+
+$Y_{\text{RW}}$ points in the same direction as $X_{\text{UE}}$: 
+
+$$Y_{\text{RW}} = \begin{bmatrix} 1 & 0 & 0 \\ \end{bmatrix}$$ 
+
+$Z_{\text{RW}}$ points in the same direction as $Z_{\text{UE}}$: 
+
+$$Z_{\text{RW}} = \begin{bmatrix} 0 & 0 & 1 \\ \end{bmatrix}$$ 
+
+Therefore, our homogenous matrix would be: 
+
+$$H = \begin{bmatrix} 
+0 & 1 & 0 & d_x \\ 
+1 & 0 & 0 & d_y  \\ 
+0 & 0 & 1 & d_z \\
+0 & 0 & 0 & 1 \\
+\end{bmatrix}$$
+
+The issue with doing this is that this assumes that going from the Robot system world to Unreal Engine **preserves relative orientation**. 
+
+What do I mean by this? 
+
+To understand this, it is useful to define what a **rigid body transformation** is. 
+
+I will use the incredibly helpful definition in this book: https://ucb-ee106.github.io/ee106a_jupyterbook/rigid_motions_R3.html
+
+Let g be a transformation defined by g: $\mathbb{R^3}$ -> $\mathbb{R^3}$
+
+g is a rigid body transformation if: 
+(1) g preserves length
+(2) g preserves relative orientation
+
+Let's focus on the second property because it's easy to see why this is not preserved in this case. 
+
+Preserving relative orientation means that if we take the cross product of two vectors in one coordinate system, it should give us the same result when taking the cross product of the same two vectors in another coordinate system. 
+
+Again, using our helpful diagram: 
+
+![IMG_FF10AC574394-1](https://github.com/user-attachments/assets/94a154b2-02c7-4237-bf79-5f831c8936fe)
+
+RH World: 
+We see that $\vec{x} \times \vec{y} = \vec{z}. This is because the cross product is defined to be the vector that is perpendicular to two vectors. 
+
+To see why this is not the case in UE World, you can use the right-hand rule, but I find this a bit confusing, so I will just show this mathematically first: 
+
+
+
+
+
+
 
 ### Intrinsic and Extrinsic Rotations
 
