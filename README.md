@@ -1,9 +1,8 @@
 # Coordinate-System-Conversions
 
-I am currently working on a game development project in Unreal Engine, and if there's one thing that I would say was the hardest part of my project, it was converting coordinates and rotations between different coordinate systems. 
+In this notebook, we will go over how to convert coordinates from one coordinate system to another. 
 
-For context, to describe the problem I was facing: 
-I had matrices corresponding to rotation and displacement in a robot's coordinate frame. To better explain what these matrices are, I am going to attempt to explain linear algebra concepts used in robotics. 
+In this notebook, I will show how to go from OpenCV convention (popular camera convention) to Unreal Engine's coordinate system, but these principles can be applied to any coordinate system conversions!
 
 ## Section 1: The Homogeneous Matrix
 
