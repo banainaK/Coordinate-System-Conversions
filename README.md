@@ -131,11 +131,15 @@ To understand this, it is useful to define what a **rigid body transformation** 
 
 I will use the incredibly helpful definition in this book: https://ucb-ee106.github.io/ee106a_jupyterbook/rigid_motions_R3.html
 
-Let g be a transformation defined by g: $\mathbb{R^3}$ -> $\mathbb{R^3}$
+<mark>Let g be a transformation defined by g: $\mathbb{R^3}$ -> $\mathbb{R^3}$ </mark>
 
-g is a rigid body transformation if: 
-(1) g preserves length
-(2) g preserves relative orientation
+<mark>g is a **rigid body transformation** if: 
+     
+     (1) g preserves length
+     
+     (2) g preserves relative orientation
+</mark>
+
 
 Let's focus on the second property because it's easy to see why this is not preserved in this case. 
 
@@ -146,13 +150,33 @@ Again, using our helpful diagram:
 ![IMG_FF10AC574394-1](https://github.com/user-attachments/assets/94a154b2-02c7-4237-bf79-5f831c8936fe)
 
 RH World: 
-We see that $\vec{x} \times \vec{y} = \vec{z}. This is because the cross product is defined to be the vector that is perpendicular to two vectors. 
+We see that $\vec{x} \times \vec{y} = \vec{z}$. This is because the cross product is defined to be the vector that is perpendicular to two vectors. 
 
 To see why this is not the case in UE World, you can use the right-hand rule, but I find this a bit confusing, so I will just show this mathematically first: 
 
+So in RH World: x = (1, 0, 0), y = (0, 1, 0)
 
+$$\vec{x} \times \vec{y} = 
+\begin{vmatrix} 
+\hat{i} & \hat{j} & \hat{k} \\ 
+1 & 0 & 0 \\ 
+0 & 1 & 0 \\
+\end{vmatrix} = \hat{k} $$
 
+In UE World, x and y are swapped, so x = (0, 1, 0) and y = (1, 0, 0): 
 
+$$\vec{x} \times \vec{y} = 
+\begin{vmatrix} 
+\hat{i} & \hat{j} & \hat{k} \\ 
+0 & 1 & 0 \\ 
+1 & 0 & 0 \\
+\end{vmatrix} = \hat{-k} $$
+
+Therefore, we see that taking the cross product of the same two vectors does not produce the same result. So, going from RH World to UE does not preserve relative orientation and is **not a rigid body transformation**
+
+We can also use the right-hand rule. For RH world, point your fingers in the direction of $x$, then curl them towards $y$. Your thumb points up, in the $z$ direction. 
+
+Now, try this for UE: point your fingers in the direction of $x$. You see that you can't curl them easily towards $y$ unless you take the larger angle. 
 
 
 
