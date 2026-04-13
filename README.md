@@ -2,7 +2,7 @@
 
 In this notebook, we will go over how to convert coordinates from one coordinate system to another. 
 
-In this notebook, I will show how to go from OpenCV convention (popular camera convention) to Unreal Engine's coordinate system, but these principles can be applied to any coordinate system conversions!
+I will specifically show how to go from OpenCV convention (popular camera convention) to Unreal Engine's coordinate system, but these principles can be applied to any coordinate systems.
 
 ## Section 1: The Homogeneous Matrix
 
